@@ -1,0 +1,87 @@
+﻿@model PreOwned268.Models.Purchase
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Purchase</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Cust.FName)
+        </dt>
+
+        <dd>
+            
+            @Html.DisplayFor(model => model.Cust.FName, "Sales Person")
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Staff.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Staff.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Trans.Make)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Trans.Make)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VAT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VAT)
+        </dd>
+
+    </dl>
+</div>
+<strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspVAT</strong>@{
+    var VAT = Model.Quantity * Model.Cost * Model.VAT; // Calculate the VAT
+    <span class="currency">&nbsp&nbsp&nbsp&nbspGBP £</span>
+    <span>@VAT</span>
+}<br /><br />
+<strong>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+&nbsp&nbsp&nbspTotal Price</strong>@{
+    var result = Model.Quantity * Model.Cost * Model.VAT + Model.Cost + Model.Cost; // Calculate the price
+    <span class="currency">&nbsp&nbsp&nbsp&nbspGBP £</span>
+    <span>@result</span>
+}<br /><br />
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PurchaseID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
