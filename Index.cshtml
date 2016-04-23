@@ -1,73 +1,33 @@
-﻿@using PagedList;
-@using PagedList.Mvc;
-
-@model IPagedList<PreOwned268.Models.Purchase>
+﻿@model IEnumerable<PreOwned268.Models.Pur>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>List of Vehicle Sale</h2>
-@using (@Html.BeginForm("Index", "Purchases2", FormMethod.Get))
-{
-    <b> Search By:</b>
-    @Html.RadioButton("searchBy", "Cust.FName", true) <text> Customer Name</text>
-    @Html.RadioButton("searchBy", "Staff.FirstName") <text> Staff Name</text><br /><br />
-    @Html.TextBox("search") <input type="submit" value="search" />
-    @Html.ActionLink("Back to List", "Index")
+<h2>Index</h2>
 
-}
- <br /><p>   @Html.ActionLink("Click to Make Sale", "Create")
+<p>
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.First().Cust.FName)
+            @Html.DisplayNameFor(model => model.Date)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.First().Staff.FirstName)
+            @Html.DisplayNameFor(model => model.Cost)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.First().Trans.Make)
+            @Html.DisplayNameFor(model => model.Quantity)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.First().Date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First().Cost)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First().Quantity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First().VAT)
+            @Html.DisplayNameFor(model => model.VAT)
         </th>
         <th></th>
     </tr>
 
-@if (Model.Count() == 0)
-{
+@foreach (var item in Model) {
     <tr>
-        <td colspan="4">
-            No records match search criteria
-        </td>
-    </tr>
-}
-else
-{
-
-    foreach (var item in Model)
-    {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Cust.FName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Staff.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Trans.Make)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Date)
         </td>
@@ -81,13 +41,11 @@ else
             @Html.DisplayFor(modelItem => item.VAT)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.PurchaseID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.PurchaseID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.PurchaseID })
+            @Html.ActionLink("Edit", "Edit", new { id=item.PurID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PurID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PurID })
         </td>
     </tr>
-    }
 }
+
 </table>
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchBy = Request.QueryString["search"] })
-, new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayPageCountAndCurrentLocation = true })
